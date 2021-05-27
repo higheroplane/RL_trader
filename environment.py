@@ -92,7 +92,7 @@ class TradingEnvironment(py_environment.PyEnvironment):
     for _ in self.positions:
       self.balance += closing_price * self.position_increment
     print("Time = {}: #Positions = {}: Cash Balance = {}: Balance = {}: Closing Price = {}"
-          .format(self.t, len(self.positions), self.balance, self.cash_balance closing_price ))
+          .format(self.t, len(self.positions), self.balance, self.cash_balance, closing_price ))
     self.t += 1
 
     if self.t == len(self.price_data)-1:
