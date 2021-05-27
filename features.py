@@ -16,11 +16,15 @@ class Features():
     self.feature_length = feature_length
     self.rsi = ta.momentum.RSIIndicator(close=price_data['Close'])
     self.macd = ta.trend.MACD(close=price_data['Close'], fillna=True)
+    self.macd = ta.trend.MACD(close=price_data['Close'], fillna=True)
+    self.macd = ta.trend.MACD(close=price_data['Close'], fillna=True)
 
     self.features = pd.DataFrame({
       "daily_returns": self.price_data['Close'].pct_change().fillna(0)*100,
       "rsi": self.rsi.rsi(), 
-      "macd": self.macd.macd()
+      "macd": self.macd.macd(),
+      "sma": self.price_data['SMA'].fillna(0),
+      "obv": self.price_data['OBV'].fillna(0)
     })
 
     # We will be shifting the start date to the length of feature_length
