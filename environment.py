@@ -6,6 +6,7 @@ import os
 import pandas as pd
 from binance.client import Client
 import datetime as dt
+import random
 
 from tf_agents.environments import py_environment
 from tf_agents.environments import tf_environment
@@ -92,7 +93,7 @@ class TradingEnvironment(py_environment.PyEnvironment):
     for _ in self.positions:
       self.balance += closing_price * self.position_increment
     print("Time = {}: #Positions = {}: Cash Balance = {}: Balance = {}: Closing Price = {}"
-          .format(self.t, len(self.positions), self.balance, self.cash_balance, closing_price ))
+          .format(self.t, len(self.positions), self.cash_balance, self.balance, closing_price ))
     self.t += 1
 
     if self.t == len(self.price_data)-1:
@@ -107,7 +108,7 @@ class TradingEnvironment(py_environment.PyEnvironment):
     return self._action_spec
   
   def _reset(self):
-    self.t = 0
+    self.t = random.randint(0, len(self.price_data) - 3000)
     self._episode_ended = False
     self.profits = 0
     self.balance = self.initial_balance
